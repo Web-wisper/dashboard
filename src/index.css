@@ -1,0 +1,328 @@
+@import "@fontsource/plus-jakarta-sans/400.css";
+@import "@fontsource/plus-jakarta-sans/500.css";
+@import "@fontsource/plus-jakarta-sans/600.css";
+@import "@fontsource/poppins/400.css";
+@import "@fontsource/poppins/500.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Web-Whisper Dark Theme */
+    --background: 252 100% 4%;
+    --foreground: 0 0% 100%;
+
+    --card: 252 100% 6%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 252 100% 6%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 256 100% 66%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 252 100% 8%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 252 100% 10%;
+    --muted-foreground: 0 0% 100%;
+
+    --accent: 278 100% 61%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 256 50% 20%;
+    --input: 256 50% 15%;
+    --ring: 256 100% 66%;
+
+    --radius: 0.75rem;
+
+    /* Custom opacity utilities */
+    --text-primary: 0 0% 100%;
+    --text-secondary: 0 0% 100% / 0.7;
+    --text-tertiary: 0 0% 100% / 0.5;
+    --text-muted: 0 0% 100% / 0.3;
+
+    /* Gradient */
+    --gradient-accent: linear-gradient(135deg, #B638FF, #863AFF);
+    --gradient-accent-hover: linear-gradient(135deg, #C654FF, #9550FF);
+
+    /* Sidebar */
+    --sidebar-background: 252 100% 5%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 256 100% 66%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 256 50% 20%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 256 50% 15%;
+    --sidebar-ring: 256 100% 66%;
+  }
+
+  .dark {
+    --background: 252 100% 4%;
+    --foreground: 0 0% 100%;
+    --card: 252 100% 6%;
+    --card-foreground: 0 0% 100%;
+    --popover: 252 100% 6%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 256 100% 66%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 252 100% 8%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 252 100% 10%;
+    --muted-foreground: 0 0% 100%;
+    --accent: 278 100% 61%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 256 50% 20%;
+    --input: 256 50% 15%;
+    --ring: 256 100% 66%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply overflow-x-hidden;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased overflow-x-hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+
+  /* Gradient button */
+  .btn-gradient {
+    background: var(--gradient-accent);
+    @apply text-white font-medium transition-all duration-200 ease-out;
+  }
+
+  .btn-gradient:hover {
+    background: var(--gradient-accent-hover);
+    @apply scale-105;
+  }
+
+  /* Glass card */
+  .glass-card {
+    @apply bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl;
+  }
+
+  /* Mic pulse animation */
+  .mic-pulse {
+    animation: micPulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes micPulse {
+
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(182, 56, 255, 0.7);
+    }
+
+    50% {
+      box-shadow: 0 0 0 20px rgba(182, 56, 255, 0);
+    }
+  }
+
+  /* Section fade in slide up */
+  .section-enter {
+    animation: sectionEnter 250ms ease-out forwards;
+  }
+
+  @keyframes sectionEnter {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Staggered fade in */
+  .stagger-fade-in {
+    animation: fadeIn 200ms ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Chart draw animation */
+  .chart-draw {
+    animation: chartDraw 1s ease-out forwards;
+  }
+
+  @keyframes chartDraw {
+    from {
+      stroke-dashoffset: 1000;
+    }
+
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Count up animation */
+  .count-up {
+    animation: countUp 600ms ease-out forwards;
+  }
+
+  /* Sidebar active indicator */
+  .sidebar-active-indicator {
+    @apply absolute left-0 top-0 h-full w-1 bg-primary rounded-r-full transition-all duration-200 ease-out;
+  }
+
+  /* Search focus glow */
+  .search-glow:focus-within {
+    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.3);
+  }
+
+  /* Dropdown animation */
+  .dropdown-enter {
+    animation: dropdownEnter 150ms ease-out forwards;
+  }
+
+  @keyframes dropdownEnter {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Fade in from right */
+  .animate-fade-in-right {
+    animation: fadeInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(40px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Fade in from left */
+  .animate-fade-in-left {
+    animation: fadeInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-40px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Subtle floating animation for images */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@layer utilities {
+  .text-opacity-100 {
+    @apply text-foreground;
+  }
+
+  .text-opacity-70 {
+    color: hsl(var(--text-secondary));
+  }
+
+  .text-opacity-50 {
+    color: hsl(var(--text-tertiary));
+  }
+
+  .text-opacity-30 {
+    color: hsl(var(--text-muted));
+  }
+
+  /* Scrollbar styling */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/50;
+  }
+
+  /* No scrollbar */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Custom height for premium inputs */
+  .h-13 {
+    height: 3.25rem;
+  }
+}
